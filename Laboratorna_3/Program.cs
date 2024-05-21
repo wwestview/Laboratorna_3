@@ -133,6 +133,178 @@
     }
     public class Kharchenko
     {
-        // add code here....
+        public class Programm
+        {
+
+            //12. Вставити К елементів, починаючи з номеру T.
+            public static void Main(string[] args)
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+                Console.Write("Як заповнити масив? 1 - вручну, будь-яке інше число - рандомно: ");
+                int choice = int.Parse(Console.ReadLine());
+                int[] arr;
+                if (choice == 1)
+                    arr = ManualFillArray();
+                else
+                {
+                    arr = RandomFillArray();
+                    Console.WriteLine("Створений массив: ");
+                    Console.WriteLine(string.Join(", ", arr));
+                }
+
+                ParseElements(ref arr);
+                Console.WriteLine(string.Join(", ", arr));
+            }
+            static int[] ManualFillArray()
+            {
+                string[] input = Console.ReadLine().Trim().Split();
+                int[] arr = new int[input.Length];
+                for (int i = 0; i < input.Length; i++)
+                    arr[i] = int.Parse(input[i]);
+                return arr;
+            }
+            static int[] RandomFillArray()
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+                Random rd = new Random();
+                Console.WriteLine("Довжина масиву: ");
+                int n = int.Parse(Console.ReadLine());
+                int[] arr = new int[n];
+                for (int i = 0; i < n; i++)
+                    arr[i] = rd.Next(-10, 10);
+                return arr;
+            }
+
+            static void ParseElements(ref int[] arr)
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+                Console.WriteLine("Номер Т: ");
+                int t = int.Parse(Console.ReadLine());
+
+                if (t < 0 || t > arr.Length)
+                    Console.WriteLine("Неможливо вставити");
+                else
+                {
+                    Console.WriteLine("Елементи, що потрібно вставити: ");
+                    int[] insArr = ManualFillArray();
+                    int k = insArr.Length;
+
+                    int[] newArr = new int[arr.Length + k];
+
+                    for (int i = 0; i < t; i++)
+                        newArr[i] = arr[i];
+
+                    for (int i = t; i < t + k; i++)
+                        newArr[i] = insArr[i - t];
+
+                    for (int i = t + k; i < newArr.Length; i++)
+                        newArr[i] = arr[i - k];
+
+                    arr = newArr;
+                }
+            }
+        }
+
+        public class Programa
+        {
+            //12. Додати рядок перед рядком, що містить максимальний елемент (якщо у різних місцях є кілька
+            // елементів з однаковим максимальним значенням, то брати останній з них).
+
+            public static void RandomFillJagArray(int[][] arr)
+            {
+                int n = arr.Length;
+                Random rand = new Random();
+                for (int i = 0; i < n; i++)
+                {
+                    int length = rand.Next(1, 10);
+                    arr[i] = new int[length];
+                    for (int j = 0; j < length; j++)
+                        arr[i][j] = rand.Next(0, 20);
+                }
+            }
+            public static void ManualFillJagArray(int[][] arr)
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+                int n = arr.Length;
+                for (int i = 0; i < n; i++)
+                {
+                    Console.WriteLine("Вводьте елементи {0}-го рядка", i);
+                    arr[i] = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+                }
+            }
+            public static int[] ManualFillArray()
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+                Console.WriteLine("Введіть елементи масива: ");
+                string[] input = Console.ReadLine().Trim().Split();
+                int[] arr = new int[input.Length];
+                for (int i = 0; i < input.Length; i++)
+                    arr[i] = int.Parse(input[i]);
+                return arr;
+            }
+            public static int GetIndexOfRowWithMaxElement(int[][] arr)
+            {
+                int maxRowIndex = 0;
+                for (int i = 1; i < arr.Length; i++)
+                {
+                    if (arr[i].Max() >= arr[maxRowIndex].Max()) maxRowIndex = i;
+                }
+                return maxRowIndex;
+            }
+
+            public static void AddRow(ref int[][] arr)
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+                int index = GetIndexOfRowWithMaxElement(arr);
+                Array.Resize(ref arr, arr.Length + 1);
+                for (int i = arr.Length - 1; i > index; i--)
+                {
+                    arr[i] = arr[i - 1];
+                }
+                arr[index] = ManualFillArray();
+                Console.WriteLine("Вставлено рядок: {0}", index);
+            }
+
+            public static void PrintJaggedArray(int[][] arr)
+            {
+                int n = arr.Length;
+                for (int i = 0; i < n; i++)
+                {
+                    Console.Write($"{i} : ");
+                    for (int j = 0; j < arr[i].Length; j++)
+                    {
+                        Console.Write(arr[i][j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            public static void Main2(string[] args)
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+                Console.WriteLine("Кількість рядків: ");
+                int n = int.Parse(Console.ReadLine());
+                int[][] jagArr = new int[n][];
+
+                Console.Write("Як заповнити масив? 1 - вручну, будь-яке інше число - рандомно: ");
+                int choice = int.Parse(Console.ReadLine());
+                if (choice == 1)
+                    ManualFillJagArray(jagArr);
+                else
+                    RandomFillJagArray(jagArr);
+
+                Console.WriteLine("Масив перед вставкою");
+                PrintJaggedArray(jagArr);
+                AddRow(ref jagArr);
+                Console.WriteLine("Масив після вставки");
+                PrintJaggedArray(jagArr);
+            }
+        }
     }
 }
