@@ -36,7 +36,7 @@ namespace Change
                     case 2:
                         Console.WriteLine("Виконую варінт Харченка: ");
                         Kharchenko.Programm.Main();
-                        Kharchenko.Programa.Main();
+                        Kharchenko.Programa.Main2();
                         break;
                     case 0:
                         Console.WriteLine("Зараз завершимо, тільки натисніть будь ласка ще раз Enter");
