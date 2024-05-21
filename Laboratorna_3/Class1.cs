@@ -9,11 +9,8 @@ namespace Change
 {
     public class TupM
     {
-        static void Main(string[] args)
+       public static void Main()
         {
-
-
-
             int choice;
             do
             {
@@ -35,8 +32,8 @@ namespace Change
                         break;
                     case 2:
                         Console.WriteLine("Виконую варінт Харченка: ");
-                        Kharchenko.Programm.Main();
-                        Kharchenko.Programa.Main2();
+                        Kharchenko.Programm.Maineeee();
+                        Kharchenko.Programa.Maineee();
                         break;
                     case 0:
                         Console.WriteLine("Зараз завершимо, тільки натисніть будь ласка ще раз Enter");

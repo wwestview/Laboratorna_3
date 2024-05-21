@@ -1,4 +1,5 @@
-﻿namespace Go_A
+﻿using System.Text;
+namespace Go_A
 {
     public class Kolachko
     {
@@ -137,7 +138,7 @@
         {
 
             //12. Вставити К елементів, починаючи з номеру T.
-            public static void Main(string[] args)
+            public static void Maineeee()
             {
                 Console.OutputEncoding = Encoding.UTF8;
                 Console.InputEncoding = Encoding.UTF8;
@@ -284,7 +285,7 @@
                     Console.WriteLine();
                 }
             }
-            public static void Main2(string[] args)
+            public static void Maineee()
             {
                 Console.OutputEncoding = Encoding.UTF8;
                 Console.InputEncoding = Encoding.UTF8;
